@@ -1,0 +1,28 @@
+{
+  "name": "@persistr/examples",
+  "version": "1.0.0",
+  "description": "Persistr examples",
+  "keywords": [
+    "persistr",
+    "examples"
+  ],
+  "author": "Sasa Djolic <sasa.djolic@gmail.com> (https://www.linkedin.com/in/sasadjolic/)",
+  "contributors": [
+    "Sasa Djolic <sasa.djolic@gmail.com> (https://www.linkedin.com/in/sasadjolic/)"
+  ],
+  "homepage": "https://github.com/persistr/examples",
+  "bugs": "https://github.com/persistr/examples/issues",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:persistr/examples.git"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@persistr/js": "^3.13.0"
+  },
+  "scripts": {
+    "ridehail": "node ridehail/main.js",
+    "todo": "node todo/main.js"
+  }
+}
