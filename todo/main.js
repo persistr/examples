@@ -5,7 +5,7 @@ const uuidv4 = require('uuid/v4')
 
 async function main() {
   const account = await persistr.local()
-  const repository = account.db('examples').ns('ridehail')
+  const repository = account.db('examples').ns('todo')
 
   // Define the domain model.
   await repository.types().define('Todo', path.resolve(__dirname, 'models', 'Todo.js'))
