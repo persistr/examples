@@ -23,6 +23,7 @@
   },
   "scripts": {
     "achievements": "node achievements/main.js",
+    "events": "node events/main.js",
     "ridehail": "node ridehail/main.js",
     "todo": "node todo/main.js"
   }
