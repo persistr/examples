@@ -28,8 +28,10 @@ async function main() {
     { data: { transaction: 'pay bill', payee: 'AT&T', debit: 10000 }}
   ])
 
-  // You can also write events one-at-a-time.
-  await stream.events().write({ data: { transaction: 'ABM cash withdrawal', debit: 2000 }})
+  // You can also write events one-at-a-time. If you don't specify an event ID,
+  // a unique event ID will be assigned to the event for you.
+  const eventID = uuidv4()
+  await stream.events().write({ id: eventID, data: { transaction: 'ABM cash withdrawal', debit: 2000 }})
   await stream.events().write({ data: { transaction: 'service charge', debit: 200 }})
   console.log('Wrote 5 events into the stream')
 
@@ -37,6 +39,11 @@ async function main() {
   console.log('Replaying events from the stream')
   await stream.events({ until: 'caught-up' }).each(event => console.log(event))
   console.log('Caught up')
+
+  // Replay events after a specific event.
+  console.log('Replaying events after a specific event in a stream:', eventID)
+  await stream.events({ after: eventID }).each(event => console.log(event))
+  console.log('Done')
 
   // Clean up by deleting the space and all its content including domains, streams, and events.
   await space.destroy()
