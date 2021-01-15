@@ -24,6 +24,7 @@
   "scripts": {
     "achievements": "node achievements/main.js",
     "events": "node events/main.js",
+    "parallel": "node parallel/single-thread.js && node parallel/cluster.js",
     "ridehail": "node ridehail/main.js",
     "todo": "node todo/main.js"
   }
