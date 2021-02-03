@@ -13,6 +13,6 @@
     "url": "git@github.com:persistr/examples.git"
   },
   "dependencies": {
-    "@persistr/js": "^3.13.0"
+    "@persistr/js": "^4.2.2"
   }
 }
