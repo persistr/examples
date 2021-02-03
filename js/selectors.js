@@ -10,7 +10,7 @@ async function main() {
   //
   // The connection string should follow this format:
   // http(s)://username:password@hostname:port/database
-  const SERVER = process.env.PERSISTR_SERVER || 'http://demo:demo@localhost:3010/demo'
+  const SERVER = process.env.PERSISTR_SERVER || 'persistr://demo:demo@localhost:3010/demo?tls=false'
 
   // Open a database connection to Persistr Server.
   const { db } = await persistr.connect(SERVER)
@@ -29,19 +29,19 @@ async function main() {
 
   // Read events from the beginning of the stream up until the selected event.
   // Use 'until' selector.
-  db.events({ until: id }).each(event => console.log(event))
+  await stream.events({ until: id }).each(event => console.log(event))
 
   // Alternatively, read events up to and including selected event.
   // Use 'to' selector.
-  //db.events({ to: id }).each(event => console.log(event))
+  //stream.events({ to: id }).each(event => console.log(event))
 
   // Read events from the selected event up until the end of the stream.
   // Use 'from' selector.
-  db.events({ from: id, until: 'caught-up' }).each(event => console.log(event))
+  await stream.events({ from: id, until: 'caught-up' }).each(event => console.log(event))
 
   // Alternatively, read events after the selected event to the end of the stream.
   // Use 'after' selector.
-  //db.events({ after: id, until: 'caught-up' }).each(event => console.log(event))
+  //stream.events({ after: id, until: 'caught-up' }).each(event => console.log(event))
 
   // Close database when we're done.
   await db.close()

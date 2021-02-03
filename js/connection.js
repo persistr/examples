@@ -13,30 +13,17 @@ async function main() {
   //
   // If default 'database' is not provided in the connection string then
   // we can't access 'connection.db'
-  const SERVER = process.env.PERSISTR_SERVER || 'http://demo:demo@localhost:3010'
+  const SERVER = process.env.PERSISTR_SERVER || 'persistr://demo:demo@localhost:3010?tls=false'
 
-  // Open a connection to a Persistr Server. Get the 'connection' object.
-  const connection = await persistr.connect(process.env.PERSISTR_SERVER)
+  // Open a connection to Persistr Server.
+  const connection = await persistr.connect(SERVER)
 
   // Because the default database was not provided in the connection string,
-  // trying to access 'connection.db' would result in an exception.
-  try {
-    const db = connection.db
-  }
-  catch (error) {
-    // Error: No default database
-  }
+  // 'connection.db' will be undefined.
+  if (!connection.db) console.log('No default database')
 
   // Access a database by name.
   const db = connection.use('demo')
-
-  // Accessing a database that doesn't exist results in an exception.
-  try {
-    const db2 = connection.use('otherdb')
-  }
-  catch (error) {
-    // Error: Database not found
-  }
 
   // Read some events from the database and display them on screen.
   db.events({ until: 'caught-up', limit: 5 }).each(event => console.log(event))

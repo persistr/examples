@@ -10,7 +10,7 @@ async function main() {
   //
   // The connection string should follow this format:
   // http(s)://username:password@hostname:port/database
-  const SERVER = process.env.PERSISTR_SERVER || 'http://demo:demo@localhost:3010/demo'
+  const SERVER = process.env.PERSISTR_SERVER || 'persistr://demo:demo@localhost:3010/demo?tls=false'
 
   // Open a database connection to Persistr Server.
   const { db } = await persistr.connect(SERVER)
@@ -24,11 +24,11 @@ async function main() {
   await stream.event('service charge', { debit: 200 }).append()
 
   // Read events from the database but only if they match a specific type.
-  db.events({ types: [ 'open account', 'deposit' ], until: 'caught-up', limit: 5 })
+  await db.events({ types: [ 'open account', 'deposit' ], until: 'caught-up', limit: 5 })
     .each(event => console.log('credit', event))
 
   // Read more events from the database and filter them by event type.
-  db.events({ types: [ 'pay bill', 'ABM cash withdrawal', 'service charge' ], until: 'caught-up', limit: 5 })
+  await db.events({ types: [ 'pay bill', 'ABM cash withdrawal', 'service charge' ], until: 'caught-up', limit: 5 })
     .each(event => console.log('debit', event))
 
   // Close database when we're done.

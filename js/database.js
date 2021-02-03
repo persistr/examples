@@ -10,29 +10,18 @@ async function main() {
   //
   // The connection string should follow this format:
   // http(s)://username:password@hostname:port/database
-  const SERVER = process.env.PERSISTR_SERVER || 'http://demo:demo@localhost:3010/demo'
+  const SERVER = process.env.PERSISTR_SERVER || 'persistr://demo:demo@localhost:3010/demo?tls=false'
 
-  // Open a connection to a Persistr Server. Use destructuring to access
-  // the default database.
+  // Open a database connection to Persistr Server.
   const { db } = await persistr.connect(SERVER)
 
-  // Accessing a database that doesn't exist results in an exception.
-  try {
-    // Both database and connection objects have a ".use()" method that
-    // allows access to other databases on the same server.
-    const db2 = db.use('otherdb')
-  }
-  catch (error) {
-    // Error: Database not found
-  }
-
   // Read some events from the database and display them on screen.
-  db.events({ until: 'caught-up', limit: 5 }).each(event => console.log(event))
+  await db.events({ until: 'caught-up', limit: 5 }).each(event => console.log(event))
 
   // Close database when we're done.
   await db.close()
 }
 
 // Run main() and catch any errors.
-async function run(f) { try { await f() } catch (error) { console.log(error.message) }}
+async function run(f) { try { await f() } catch (error) { console.log('ERROR:', error.message) }}
 run(main)
