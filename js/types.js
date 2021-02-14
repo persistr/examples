@@ -1,5 +1,5 @@
-// Demonstrates how to write events into an event stream and
-// read them back from the stream.
+// Demonstrates how to use the `types` selector to
+// filter events by type.
 
 const { persistr } = require('@persistr/js')
 

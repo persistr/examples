@@ -1,5 +1,5 @@
-// Demonstrates how to write events into an event stream and
-// read them back from the stream.
+// Demonstrates how to use event selectors to filter and
+// iterate over events in an event stream.
 
 const { persistr } = require('@persistr/js')
 

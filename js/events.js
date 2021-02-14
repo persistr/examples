@@ -1,5 +1,5 @@
 // Demonstrates how to write events into an event stream and
-// read them back from the stream.
+// read events back from the database.
 
 const { persistr } = require('@persistr/js')
 
