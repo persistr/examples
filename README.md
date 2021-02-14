@@ -14,6 +14,21 @@ These are examples of how to use Persistr Server and Persistr JS SDK. The follow
 
 - [js/types.js](js/types.js): Demonstrates how to use the `types` selector to filter events by type
 
+## Running the examples
+
+Change into the `js` folder and run `npm ci` to install dependencies:
+
+```
+cd js
+npm ci
+```
+
+Then run each example on the command-line by using `node`:
+
+```
+node events.js
+```
+
 ## License
 
 See the [LICENSE](LICENSE) file for license rights and limitations (GPL).
